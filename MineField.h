@@ -13,12 +13,16 @@ public:
     int numOfColumns;
     int numOfMines;
     std::vector<std::vector<Cell*>> widgetMatrix;
+    int score;
+    int cellSize;
 
 
     MineField(int numOfRows, int numOfColumns, int numOfMines, int cellSize);
-
-
+    bool winCheck();
+    void reveal(int row, int col);
+    void onRightClick(int row, int col);
     int countAdjacentMines(int row, int col);
+    void endGame();
 
 };
 
