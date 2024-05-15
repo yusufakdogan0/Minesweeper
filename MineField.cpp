@@ -9,7 +9,7 @@
 MineField::MineField(int numOfRows, int numOfColumns, int numOfMines, int cellSize)
     : numOfRows(numOfRows), numOfColumns(numOfColumns), numOfMines(numOfMines), score(0), cellSize(cellSize) {
 
-    QIcon emptyIcon(R"(C:\Users\DELL\Desktop\Project3\assets\empty.png)");
+    QIcon emptyIcon(R"(..\assets\empty.png)");
     QPixmap pixmap = emptyIcon.pixmap(QSize(cellSize, cellSize));
     // Scale pixmap to fit the button size
     pixmap = pixmap.scaled(QSize(cellSize-1, cellSize-1), Qt::KeepAspectRatioByExpanding);
@@ -112,7 +112,7 @@ void MineField::reveal(int row, int col) {
         score++;
         curCell->opened = true;
         QLabel *label = new QLabel;
-        QPixmap pixmap(R"(C:\Users\DELL\Desktop\Project3\assets\0.png)");
+        QPixmap pixmap(R"(..\assets\0.png)");
         pixmap = pixmap.scaled(QSize(cellSize - 1, cellSize - 1), Qt::KeepAspectRatioByExpanding);
         label->setPixmap(pixmap);
         this->addWidget(label,row,col);
@@ -132,7 +132,7 @@ void MineField::reveal(int row, int col) {
         score++;
         curCell->opened = true;
         QLabel *label = new QLabel;
-        std::string address = "C:/Users/DELL/Desktop/Project3/assets/" + std::to_string(curCell->status) + ".png";
+        std::string address = "../assets/" + std::to_string(curCell->status) + ".png";
         QPixmap pixmap(address.c_str());
         pixmap = pixmap.scaled(QSize(cellSize - 1, cellSize - 1), Qt::KeepAspectRatioByExpanding);
         label->setPixmap(pixmap);
@@ -145,7 +145,7 @@ void MineField::onRightClick(int row, int col) {
     Cell *curCell = widgetMatrix[row][col];
     if (!curCell->flagged) {
         // Load the flag icon (assuming you have it)
-        QIcon flagIcon(R"(C:\Users\DELL\Desktop\Project3\assets\flag.png)");
+        QIcon flagIcon(R"(..\assets\flag.png)");
 
         // Create a pixmap from the flag icon
         QPixmap pixmap = flagIcon.pixmap(QSize(cellSize, cellSize));
@@ -167,7 +167,7 @@ void MineField::onRightClick(int row, int col) {
     } else {
         // If the cell is already flagged, remove the flag icon
         // You can set it back to the original empty icon or any other desired icon
-        QIcon emptyIcon(R"(C:\Users\DELL\Desktop\Project3\assets\empty.png)");
+        QIcon emptyIcon(R"(..\assets\empty.png)");
         // Create a pixmap from the flag icon
         QPixmap pixmap = emptyIcon.pixmap(QSize(cellSize, cellSize));
 
@@ -194,13 +194,13 @@ void MineField::endGame() {
                 QLabel *label = new QLabel;
 
                 if (curCell->status == -1){
-                    QPixmap pixmap("C:/Users/DELL/Desktop/Project3/assets/mine.png");
+                    QPixmap pixmap("../assets/mine.png");
                     pixmap = pixmap.scaled(QSize(cellSize - 1, cellSize - 1), Qt::KeepAspectRatioByExpanding);
                     label->setPixmap(pixmap);
                     this->addWidget(label,row,col);
                 }
                 else{
-                    QPixmap pixmap("C:/Users/DELL/Desktop/Project3/assets/empty.png");
+                    QPixmap pixmap("../assets/empty.png");
                     pixmap = pixmap.scaled(QSize(cellSize - 1, cellSize - 1), Qt::KeepAspectRatioByExpanding);
                     label->setPixmap(pixmap);
                     this->addWidget(label,row,col);
