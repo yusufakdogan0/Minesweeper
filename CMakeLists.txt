@@ -19,8 +19,7 @@ add_executable(Project3 main.cpp
         MineField.h
         Cell.cpp
         Cell.h
-        OpenedCell.cpp
-        OpenedCell.h
+        Functions.h
 )
 target_link_libraries(Project3
         Qt::Core
