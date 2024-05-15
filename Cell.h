@@ -9,6 +9,7 @@ public :
     int row;
     int column;
     int status;
+    bool flagged;
     bool opened;
     int buttonSize;
     Cell(int cellSize, int row, int column);
