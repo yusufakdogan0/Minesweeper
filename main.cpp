@@ -4,34 +4,95 @@
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QWidget> // Include QWidget header file
+#include <QMessageBox>
 #include "MineField.h"
 #include "Cell.h"
+#include "Functions.h"
 
 #define cellSize 30
+#define numOfRows 20
+#define numOfColumns 20
+#define numOfMines 10
+
+QLabel *score_label;
 
 
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
-    int numOfRows = 10;
-    int numOfColumns = 10;
-    int numOfMines = 5;
+
+    initializeGame();
 
 
+    return QApplication::exec();
+}
+
+void updateScore(MineField *minefield){
+    QString text = "Score: " + QString::number(minefield->score);
+    score_label->setText(text);
+}
+
+void checkWin(MineField *minefield){
+    if(minefield->score + numOfMines == numOfColumns * numOfRows){
+        minefield->endGame();
+        QMessageBox *messageBox = new QMessageBox;
+        messageBox->setText("You Win!");
+        messageBox->show();
+    }
+}
+void loseGame(MineField *minefield){
+    minefield->endGame();
+    QMessageBox *messageBox = new QMessageBox;
+    messageBox->setText("You Lose!");
+    messageBox->show();
+}
+void initializeGame(){
+    // Create main window
+    QMainWindow *mainWindow = new QMainWindow;
+
+
+
+    // Create minefield
     QWidget *mainWidget = new QWidget;
     mainWidget->setFixedHeight(numOfRows * cellSize);
     mainWidget->setFixedWidth(numOfColumns * cellSize);
-    QHBoxLayout *boxLayout = new QHBoxLayout(mainWidget);
+    QVBoxLayout *mainBox = new QVBoxLayout;
+    QHBoxLayout *horizontalBox = new QHBoxLayout;
+
+    // Create labels and buttons
+    QPushButton *restartButton = new QPushButton;
+    restartButton->setText("Restart");
+    QObject::connect(restartButton, &QPushButton::clicked, [=]() {
+        restartGame(mainWindow);
+    });
+    QPushButton *hintButton = new QPushButton;
+    hintButton->setText("Hint");
+
+    score_label = new QLabel;
+    score_label->setText("Score: 0");
+    horizontalBox->addWidget(score_label);
+    horizontalBox->addWidget(restartButton);
+    horizontalBox->addWidget(hintButton);
+
+    mainBox->addLayout(horizontalBox);
+
+
 
     MineField *mineField = new MineField(numOfRows, numOfColumns, numOfMines, cellSize);
     mineField->setVerticalSpacing(0);
     mineField->setSpacing(0);
 
 
-    boxLayout->addLayout(mineField); // Add the container widget to the layout
+    mainBox->addLayout(mineField); // Add the container widget to the layout
+    mainWidget->setLayout(mainBox);
 
-    mainWidget->setLayout(boxLayout); // Set the layout of mainWidget
 
-    mainWidget->show();
-
-    return QApplication::exec();
+    mainWindow->setCentralWidget(mainWidget);
+    mainWindow->setWindowTitle("Minesweeper");
+    QIcon icon(R"(C:\Users\DELL\Desktop\Project3\assets\mine.png)");
+    mainWindow->setWindowIcon(icon);
+    mainWindow->show();
+}
+void restartGame(QMainWindow *mainWindow){
+    mainWindow->close();
+    initializeGame();
 }
