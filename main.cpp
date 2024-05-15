@@ -10,9 +10,9 @@
 #include "Functions.h"
 
 #define cellSize 30
-#define numOfRows 20
-#define numOfColumns 20
-#define numOfMines 10
+#define numOfRows 3
+#define numOfColumns 3
+#define numOfMines 3
 
 QLabel *score_label;
 
@@ -53,8 +53,8 @@ void initializeGame(){
 
     // Create minefield
     QWidget *mainWidget = new QWidget;
-    mainWidget->setFixedHeight(numOfRows * cellSize);
-    mainWidget->setFixedWidth(numOfColumns * cellSize);
+    mainWidget->setFixedHeight(numOfRows * cellSize + 50);
+    mainWidget->setFixedWidth(numOfColumns * cellSize + 20);
     QVBoxLayout *mainBox = new QVBoxLayout;
     QHBoxLayout *horizontalBox = new QHBoxLayout;
 
@@ -88,7 +88,7 @@ void initializeGame(){
 
     mainWindow->setCentralWidget(mainWidget);
     mainWindow->setWindowTitle("Minesweeper");
-    QIcon icon(R"(C:\Users\DELL\Desktop\Project3\assets\mine.png)");
+    QIcon icon(R"(..\assets\mine.png)");
     mainWindow->setWindowIcon(icon);
     mainWindow->show();
 }
