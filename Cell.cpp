@@ -10,6 +10,7 @@ Cell::Cell(int cellSize, int row, int column){
 
     this->status = 0;
     opened = false;
+    flagged = false;
     this->buttonSize = cellSize;
     this->setFixedSize(buttonSize,buttonSize);
 
