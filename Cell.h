@@ -12,6 +12,7 @@ public :
     bool flagged;
     bool opened;
     int buttonSize;
+    bool virtual_flag;
     Cell(int cellSize, int row, int column);
 
 };
