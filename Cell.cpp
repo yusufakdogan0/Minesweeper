@@ -11,6 +11,7 @@ Cell::Cell(int cellSize, int row, int column){
     this->status = 0;
     opened = false;
     flagged = false;
+    virtual_flag = false;
     this->buttonSize = cellSize;
     this->setFixedSize(buttonSize,buttonSize);
 
