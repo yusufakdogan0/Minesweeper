@@ -9,6 +9,7 @@ void checkWin(MineField *minefield);
 void loseGame(MineField *minefield);
 void initializeGame();
 void restartGame(QMainWindow *mainWindow);
+void hint(MineField *minefield);
 
 
 #endif //PROJECT3_FUNCTIONS_H
